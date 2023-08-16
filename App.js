@@ -8,8 +8,8 @@ import {
   Keyboard,
 } from "react-native";
 
-import LoginScreen from "./Screens/auth/LoginScreen";
-import RegistrationScreen from "./Screens/auth//RegistrationScreen";
+import LoginScreen from "./Screens/authScreens/LoginScreen";
+import RegistrationScreen from "./Screens/authScreens/RegistrationScreen";
 
 export default function App() {
   return (
