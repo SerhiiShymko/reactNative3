@@ -1,28 +1,44 @@
-import React from "react";
-import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  ImageBackground,
-  View,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { useCallback, useEffect } from "react";
+import { useFonts } from "expo-font";
+import { StyleSheet, View } from "react-native";
+import * as SplashScreen from "expo-splash-screen";
 
 import LoginScreen from "./Screens/authScreens/LoginScreen";
 import RegistrationScreen from "./Screens/authScreens/RegistrationScreen";
 
-export default function App() {
+import useRoute from "./router";
+import { NavigationContainer } from "@react-navigation/native";
+
+export default function App(isAuth) {
+  const [fontsLoaded] = useFonts({
+    "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
+    "Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
+    "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
+  });
+
+  useEffect(() => {
+    async function prepare() {
+      await SplashScreen.preventAutoHideAsync();
+    }
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [!fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
+  const routing = useRoute(isAuth);
+
   return (
-    <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <ImageBackground
-          style={styles.imgBg}
-          source={require("./assets/images/imageBG.png")}>
-          <RegistrationScreen />
-          {/* <LoginScreen /> */}
-          <StatusBar style="auto" />
-        </ImageBackground>
-      </TouchableWithoutFeedback>
+    <View onLayout={onLayoutRootView} style={styles.container}>
+      <NavigationContainer>{routing}</NavigationContainer>
     </View>
   );
 }
@@ -30,12 +46,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-  },
-  imgBg: {
-    flex: 1,
-    resizeMode: "cover",
-    justifyContent: "center",
   },
 });
