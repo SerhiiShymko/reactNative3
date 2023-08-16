@@ -1,31 +1,36 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/native-stack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import LoginScreen from "./Screens/authScreens/LoginScreen";
+import RegistrationScreen from "./Screens/authScreens/RegistrationScreen";
+import ProfileScreen from "./Screens/navigateScreens/ProfileScreen";
+import CreatePostsScreen from "./Screens/navigateScreens/CreatePostsScreen";
+import Home from "./Screens/navigateScreens/Home";
 
-const AuthStack = createStackNavigator();
+const AuthStack = createNativeStackNavigator();
 const NavigateStack = createBottomTabNavigator();
 
 export default function useRoute(isAuth) {
   if (isAuth) {
     return (
-      <AuthStack.Navigate
+      <AuthStack.Navigator
         initialRouteName="Login"
-        screenOption={{ headerShow: false }}>
+        screenOptions={{ headerShow: false }}>
         <AuthStack.Screen
           name="Registration"
-          component={() => (
-            <RegistrationScreen isAuth={isAuth} />
-          )}></AuthStack.Screen>
+          component={() => <RegistrationScreen isAuth={isAuth} />}
+        />
         <AuthStack.Screen
-          name="Registration"
-          component={() => <LoginScreen isAuth={isAuth} />}></AuthStack.Screen>
-      </AuthStack.Navigate>
+          name="Login"
+          component={() => <LoginScreen isAuth={isAuth} />}
+        />
+      </AuthStack.Navigator>
     );
   }
 
   return (
     <NavigateStack.Navigator
-      initialRouteName="Name"
+      initialRouteName="Home"
       tabBarOptions={{ showLabel: false }}
       activeColor="#FF6C00"
       screenOptions={{

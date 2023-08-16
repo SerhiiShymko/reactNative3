@@ -4,11 +4,7 @@ import { useFonts } from "expo-font";
 import { StyleSheet, View } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 
-import LoginScreen from "./Screens/authScreens/LoginScreen";
-import RegistrationScreen from "./Screens/authScreens/RegistrationScreen";
-
 import useRoute from "./router";
-import { NavigationContainer } from "@react-navigation/native";
 
 export default function App(isAuth) {
   const [fontsLoaded] = useFonts({
