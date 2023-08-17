@@ -10,6 +10,7 @@ import {
   Image,
   Keyboard,
   TouchableWithoutFeedback,
+  Platform,
 } from "react-native";
 
 const initialState = {
@@ -47,6 +48,7 @@ const RegistrationScreen = ({ isAuth }) => {
     console.log(state);
     setState(initialState);
     isAuth = true;
+    navigation.navigate("Home");
   };
 
   return (
@@ -55,8 +57,19 @@ const RegistrationScreen = ({ isAuth }) => {
         <ImageBackground
           source={require("../../assets/images/imageBG.png")}
           style={styles.imageBg}>
-          <View style={styles.avatarBox}>
-            <TouchableOpacity activeOpacity={0.7}>
+          <View
+            style={{
+              ...styles.formWrapper,
+              ...Platform.select({
+                ios: {
+                  marginTop: isShowKeyboard ? 350 : 219,
+                },
+                android: {
+                  marginTop: isShowKeyboard ? -100 : 0,
+                },
+              }),
+            }}>
+            <View style={styles.avatarBox}>
               {isShowKeyboard && (
                 <Image source={require("../../assets/images/avatar.png")} />
               )}
@@ -72,134 +85,134 @@ const RegistrationScreen = ({ isAuth }) => {
                     : require("../../assets/images/add.png")
                 }
               />
-            </TouchableOpacity>
-          </View>
-          <Text style={styles.title}>Реєстрація</Text>
-          <View
-            style={{
-              paddingBottom: isShowKeyboard ? 32 : 45,
-            }}>
-            <View style={styles.inputUserName}>
-              <TextInput
-                style={{
-                  ...styles.input,
-                  borderColor: isFocusInput.username ? "#FF6C00" : "#F6F6F6",
-                  backgroundColor: isFocusInput.username
-                    ? "#FFFFFF"
-                    : "#F6F6F6",
-                }}
-                textAlign={"left"}
-                placeholderTextColor={"#BDBDBD"}
-                textContentType="username"
-                value={state.username}
-                placeholder="Логін"
-                onFocus={() => {
-                  setIsShowKeyboard(true),
-                    setIsFocusInput({
-                      ...isFocusInput,
-                      username: true,
-                    });
-                }}
-                onBlur={() => {
-                  setIsFocusInput({
-                    ...isFocusInput,
-                    username: false,
-                  });
-                }}
-                onChangeText={(value) =>
-                  setState((prevState) => ({
-                    ...prevState,
-                    username: value,
-                  }))
-                }
-              />
             </View>
-            <View style={styles.inputMail}>
-              <TextInput
-                style={{
-                  ...styles.input,
-                  borderColor: isFocusInput.email ? "#FF6C00" : "#F6F6F6",
-                  backgroundColor: isFocusInput.email ? "#FFFFFF" : "#F6F6F6",
-                }}
-                textAlign={"left"}
-                placeholderTextColor={"#BDBDBD"}
-                keyboardType="email-address"
-                textContentType="emailAddress"
-                value={state.email}
-                placeholder="Адреса електронної пошти"
-                onFocus={() => {
-                  setIsShowKeyboard(true),
-                    setIsFocusInput({
-                      ...isFocusInput,
-                      email: true,
-                    });
-                }}
-                onBlur={() => {
-                  setIsFocusInput({
-                    ...isFocusInput,
-                    email: false,
-                  });
-                }}
-                onChangeText={(value) =>
-                  setState((prevState) => ({
-                    ...prevState,
-                    email: value,
-                  }))
-                }
-              />
-            </View>
-            <View style={styles.inputPassword}>
-              <TextInput
-                style={{
-                  ...styles.input,
-                  borderColor: isFocusInput.password ? "#FF6C00" : "#F6F6F6",
-                  backgroundColor: isFocusInput.password
-                    ? "#FFFFFF"
-                    : "#F6F6F6",
-                }}
-                textAlign={"left"}
-                placeholderTextColor={"#BDBDBD"}
-                textContentType="password"
-                value={state.password}
-                secureTextEntry={secureTextEntry}
-                placeholder="Пароль"
-                onFocus={() => {
-                  setIsShowKeyboard(true),
-                    setIsFocusInput({
-                      ...isFocusInput,
-                      password: true,
-                    });
-                }}
-                onBlur={() => {
-                  setIsFocusInput({
-                    ...isFocusInput,
-                    password: false,
-                  });
-                }}
-                onChangeText={(value) =>
-                  setState((prevState) => ({
-                    ...prevState,
-                    password: value,
-                  }))
-                }
-              />
-              <Text style={styles.showPass} onPress={openPassword}>
-                {secureTextEntry ? "Показати" : "Сховати"}
-              </Text>
-            </View>
-            <TouchableOpacity
-              style={styles.btn}
-              activeOpacity={0.8}
-              onPress={handleRegistration}>
-              <Text style={styles.btnText}>Зареєструватися</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => {
-                navigation.navigate("Login");
+            <Text style={styles.title}>Реєстрація</Text>
+            <View
+              style={{
+                paddingBottom: isShowKeyboard ? 32 : 45,
               }}>
-              <Text style={styles.formLink}>Уже есть аккаунт? Войти</Text>
-            </TouchableOpacity>
+              <View style={styles.inputUserName}>
+                <TextInput
+                  style={{
+                    ...styles.input,
+                    borderColor: isFocusInput.username ? "#FF6C00" : "#F6F6F6",
+                    backgroundColor: isFocusInput.username
+                      ? "#FFFFFF"
+                      : "#F6F6F6",
+                  }}
+                  textAlign={"left"}
+                  placeholderTextColor={"#BDBDBD"}
+                  textContentType="username"
+                  value={state.username}
+                  placeholder="Логін"
+                  onFocus={() => {
+                    setIsShowKeyboard(true),
+                      setIsFocusInput({
+                        ...isFocusInput,
+                        username: true,
+                      });
+                  }}
+                  onBlur={() => {
+                    setIsFocusInput({
+                      ...isFocusInput,
+                      username: false,
+                    });
+                  }}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({
+                      ...prevState,
+                      username: value,
+                    }))
+                  }
+                />
+              </View>
+              <View style={styles.inputMail}>
+                <TextInput
+                  style={{
+                    ...styles.input,
+                    borderColor: isFocusInput.email ? "#FF6C00" : "#F6F6F6",
+                    backgroundColor: isFocusInput.email ? "#FFFFFF" : "#F6F6F6",
+                  }}
+                  textAlign={"left"}
+                  placeholderTextColor={"#BDBDBD"}
+                  keyboardType="email-address"
+                  textContentType="emailAddress"
+                  value={state.email}
+                  placeholder="Адреса електронної пошти"
+                  onFocus={() => {
+                    setIsShowKeyboard(true),
+                      setIsFocusInput({
+                        ...isFocusInput,
+                        email: true,
+                      });
+                  }}
+                  onBlur={() => {
+                    setIsFocusInput({
+                      ...isFocusInput,
+                      email: false,
+                    });
+                  }}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({
+                      ...prevState,
+                      email: value,
+                    }))
+                  }
+                />
+              </View>
+              <View style={styles.inputPassword}>
+                <TextInput
+                  style={{
+                    ...styles.input,
+                    borderColor: isFocusInput.password ? "#FF6C00" : "#F6F6F6",
+                    backgroundColor: isFocusInput.password
+                      ? "#FFFFFF"
+                      : "#F6F6F6",
+                  }}
+                  textAlign={"left"}
+                  placeholderTextColor={"#BDBDBD"}
+                  textContentType="password"
+                  value={state.password}
+                  secureTextEntry={secureTextEntry}
+                  placeholder="Пароль"
+                  onFocus={() => {
+                    setIsShowKeyboard(true),
+                      setIsFocusInput({
+                        ...isFocusInput,
+                        password: true,
+                      });
+                  }}
+                  onBlur={() => {
+                    setIsFocusInput({
+                      ...isFocusInput,
+                      password: false,
+                    });
+                  }}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({
+                      ...prevState,
+                      password: value,
+                    }))
+                  }
+                />
+                <Text style={styles.showPass} onPress={openPassword}>
+                  {secureTextEntry ? "Показати" : "Сховати"}
+                </Text>
+              </View>
+              <TouchableOpacity
+                style={styles.btn}
+                activeOpacity={0.8}
+                onPress={handleRegistration}>
+                <Text style={styles.btnText}>Зареєструватися</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={() => {
+                  navigation.navigate("Login");
+                }}>
+                <Text style={styles.formLink}>Вже є акаунт? Увійти</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </ImageBackground>
       </View>
@@ -210,6 +223,7 @@ export default RegistrationScreen;
 
 const styles = StyleSheet.create({
   container: {
+    position: "relative",
     flex: 1,
   },
 
@@ -229,7 +243,7 @@ const styles = StyleSheet.create({
   },
   avatarBox: {
     position: "absolute",
-    left: "38%",
+    left: "35%",
     top: "-15%",
     width: 120,
     height: 120,
@@ -258,7 +272,7 @@ const styles = StyleSheet.create({
     borderColor: "#E8E8E8",
   },
   title: {
-    fontFamily: "RobotoMedium",
+    fontFamily: "Roboto-Medium",
     fontStyle: "normal",
     fontSize: 30,
     lineHeight: 35,

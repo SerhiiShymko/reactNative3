@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Keyboard,
   TouchableWithoutFeedback,
+  Platform,
 } from "react-native";
 
 const initialState = {
@@ -19,6 +20,10 @@ const initialState = {
 const initialFocuseState = {
   email: false,
   password: false,
+};
+
+const onBtnLogPress = () => {
+  navigation.navigate("Home");
 };
 
 const LoginScreen = () => {
@@ -45,112 +50,132 @@ const LoginScreen = () => {
     setState(initialState);
   };
 
+  const onBtnLogPress = () => {
+    navigation.navigate("Home");
+  };
+
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
       <View style={styles.container}>
         <ImageBackground
           source={require("../../assets/images/imageBG.png")}
           style={styles.imageBg}>
-          <Text
-            style={{
-              ...styles.title,
-              marginTop: isShowKeyboard ? 24 : 0,
-            }}>
-            Увійти
-          </Text>
-
           <View
             style={{
-              paddingBottom: isShowKeyboard ? 32 : 111,
+              ...styles.formWrapper,
+
+              ...Platform.select({
+                ios: {
+                  marginTop: isShowKeyboard ? 456 : 0,
+                },
+                android: {
+                  marginTop: isShowKeyboard ? -70 : 0,
+                },
+              }),
             }}>
-            <View style={styles.inputMail}>
-              <TextInput
-                style={{
-                  ...styles.input,
-                  borderColor: isFocusInput.email ? "#FF6C00" : "#F6F6F6",
-                  backgroundColor: isFocusInput.email ? "#FFFFFF" : "#F6F6F6",
-                }}
-                textAlign={"left"}
-                placeholderTextColor={"#BDBDBD"}
-                keyboardType="email-address"
-                textContentType="emailAddress"
-                value={state.email}
-                placeholder="Адреса електронної пошти"
-                onFocus={() => {
-                  setIsShowKeyboard(true),
-                    setIsFocusInput({
-                      ...isFocusInput,
-                      email: true,
-                    });
-                }}
-                onBlur={() => {
-                  setIsFocusInput({
-                    ...isFocusInput,
-                    email: false,
-                  });
-                }}
-                onChangeText={(value) =>
-                  setState((prevState) => ({
-                    ...prevState,
-                    email: value,
-                  }))
-                }
-              />
-            </View>
-            <View style={styles.inputPassword}>
-              <TextInput
-                style={{
-                  ...styles.input,
-                  borderColor: isFocusInput.password ? "#FF6C00" : "#F6F6F6",
-                  backgroundColor: isFocusInput.password
-                    ? "#FFFFFF"
-                    : "#F6F6F6",
-                }}
-                textAlign={"left"}
-                placeholderTextColor={"#BDBDBD"}
-                textContentType="password"
-                value={state.password}
-                secureTextEntry={secureTextEntry}
-                placeholder="Пароль"
-                onFocus={() => {
-                  setIsShowKeyboard(true),
-                    setIsFocusInput({
-                      ...isFocusInput,
-                      password: true,
-                    });
-                }}
-                onBlur={() => {
-                  setIsFocusInput({
-                    ...isFocusInput,
-                    password: false,
-                  });
-                }}
-                onChangeText={(value) =>
-                  setState((prevState) => ({
-                    ...prevState,
-                    password: value,
-                  }))
-                }
-              />
-              <Text style={styles.showPass} onPress={openPassword}>
-                {secureTextEntry ? "Показати" : "Сховати"}
-              </Text>
-            </View>
-            <TouchableOpacity
-              style={styles.btn}
-              activeOpacity={0.8}
-              onPress={handleLogin}>
-              <Text style={styles.btnText}>Увійти</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => {
-                navigation.navigate("Registration");
+            <Text
+              style={{
+                ...styles.title,
+                marginTop: isShowKeyboard ? 24 : 0,
               }}>
-              <Text style={styles.formLink}>
-                Немає акаунту? Зареєструватися
-              </Text>
-            </TouchableOpacity>
+              Увійти
+            </Text>
+
+            <View
+              style={{
+                paddingBottom: isShowKeyboard ? 32 : 111,
+              }}>
+              <View style={styles.inputMail}>
+                <TextInput
+                  style={{
+                    ...styles.input,
+                    borderColor: isFocusInput.email ? "#FF6C00" : "#F6F6F6",
+                    backgroundColor: isFocusInput.email ? "#FFFFFF" : "#F6F6F6",
+                  }}
+                  textAlign={"left"}
+                  placeholderTextColor={"#BDBDBD"}
+                  keyboardType="email-address"
+                  textContentType="emailAddress"
+                  value={state.email}
+                  placeholder="Адреса електронної пошти"
+                  onFocus={() => {
+                    setIsShowKeyboard(true),
+                      setIsFocusInput({
+                        ...isFocusInput,
+                        email: true,
+                      });
+                  }}
+                  onBlur={() => {
+                    setIsFocusInput({
+                      ...isFocusInput,
+                      email: false,
+                    });
+                  }}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({
+                      ...prevState,
+                      email: value,
+                    }))
+                  }
+                />
+              </View>
+              <View style={styles.inputPassword}>
+                <TextInput
+                  style={{
+                    ...styles.input,
+                    borderColor: isFocusInput.password ? "#FF6C00" : "#F6F6F6",
+                    backgroundColor: isFocusInput.password
+                      ? "#FFFFFF"
+                      : "#F6F6F6",
+                  }}
+                  textAlign={"left"}
+                  placeholderTextColor={"#BDBDBD"}
+                  textContentType="password"
+                  value={state.password}
+                  secureTextEntry={secureTextEntry}
+                  placeholder="Пароль"
+                  onFocus={() => {
+                    setIsShowKeyboard(true),
+                      setIsFocusInput({
+                        ...isFocusInput,
+                        password: true,
+                      });
+                  }}
+                  onBlur={() => {
+                    setIsFocusInput({
+                      ...isFocusInput,
+                      password: false,
+                    });
+                  }}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({
+                      ...prevState,
+                      password: value,
+                    }))
+                  }
+                />
+                <Text style={styles.showPass} onPress={openPassword}>
+                  {secureTextEntry ? "Показати" : "Сховати"}
+                </Text>
+              </View>
+              <TouchableOpacity
+                style={styles.btn}
+                activeOpacity={0.8}
+                onPress={handleLogin}>
+                <TouchableOpacity onPress={onBtnLogPress}>
+                  <Text style={styles.btnText}>Увійти</Text>
+                </TouchableOpacity>
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={() => {
+                  navigation.navigate("Registration");
+                }}>
+                <Text style={styles.formLink}>
+                  Немає акаунту? Зареєструватися
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </ImageBackground>
       </View>
@@ -220,6 +245,19 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     justifyContent: "center",
     alignItems: "center",
+  },
+  LogBtn: {
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginBottom: 16,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 343,
+    height: 51,
+    borderRadius: 100,
+    backgroundColor: "#FF6C00",
   },
   btnText: {
     fontFamily: "Roboto-Regular",

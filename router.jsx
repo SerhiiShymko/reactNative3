@@ -18,11 +18,13 @@ export default function useRoute(isAuth) {
         screenOptions={{ headerShow: false }}>
         <AuthStack.Screen
           name="Registration"
-          component={() => <RegistrationScreen isAuth={isAuth} />}
+          component={RegistrationScreen}
+          initialParams={{ isAuth }}
         />
         <AuthStack.Screen
           name="Login"
-          component={() => <LoginScreen isAuth={isAuth} />}
+          component={LoginScreen}
+          initialParams={{ isAuth }}
         />
       </AuthStack.Navigator>
     );
