@@ -34,17 +34,13 @@ export default function useRoute(isAuth) {
       tabBarOptions={{ showLabel: false }}
       activeColor="#FF6C00"
       screenOptions={{
-        tarBarStyle: {
-          height: 83,
-          paddingHorizontal: 81,
-        },
-        headerTitleAlign: "center",
-        headerTitleStyle: {
-          fontSize: 17,
-          fontFamily: "Roboto-Medium",
-          lineHeight: 22,
-          color: "#212121",
-        },
+        tabBarShowLabel: false,
+        tabBarStyle: [
+          {
+            display: "flex",
+          },
+          null,
+        ],
       }}>
       <NavigateStack.Screen
         name="Home"

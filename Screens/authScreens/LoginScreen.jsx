@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import {
   StyleSheet,
@@ -20,7 +21,9 @@ const initialFocuseState = {
   password: false,
 };
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = () => {
+  const navigation = useNavigation();
+
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
   const [isFocusInput, setIsFocusInput] = useState(initialFocuseState);
@@ -175,7 +178,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   title: {
-    fontFamily: "RobotoMedium",
+    fontFamily: "Roboto-Medium",
     fontStyle: "normal",
     fontSize: 30,
     lineHeight: 35,
@@ -184,7 +187,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   input: {
-    fontFamily: "RobotoRegular",
+    fontFamily: "Roboto-Regular",
     fontStyle: "normal",
     fontSize: 16,
     lineHeight: 19,
@@ -201,7 +204,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   showPass: {
-    fontFamily: "RobotoRegular",
+    fontFamily: "Roboto-Regular",
     fontStyle: "normal",
     lineHeight: 19,
     fontSize: 16,
@@ -219,13 +222,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   btnText: {
-    fontFamily: "RobotoRegular",
+    fontFamily: "Roboto-Regular",
     fontStyle: "normal",
     lineHeight: 19,
     color: "#FFFFFF",
   },
   formLink: {
-    fontFamily: "RobotoRegular",
+    fontFamily: "Roboto-Regular",
     fontStyle: "normal",
     lineHeight: 19,
     marginTop: 16,
