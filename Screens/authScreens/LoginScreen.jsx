@@ -22,16 +22,14 @@ const initialFocuseState = {
   password: false,
 };
 
-const onBtnLogPress = () => {
-  navigation.navigate("Home");
-};
-
 const LoginScreen = () => {
   const navigation = useNavigation();
 
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
   const [isFocusInput, setIsFocusInput] = useState(initialFocuseState);
+  const [email, onChangeEmail] = useState("");
+  const [password, onChangePass] = useState("");
 
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const openPassword = () => {
@@ -52,6 +50,9 @@ const LoginScreen = () => {
 
   const onBtnLogPress = () => {
     navigation.navigate("Home");
+
+    onChangeEmail("");
+    onChangePass("");
   };
 
   return (
@@ -97,6 +98,7 @@ const LoginScreen = () => {
                   keyboardType="email-address"
                   textContentType="emailAddress"
                   value={state.email}
+                  onChangeText={onChangeEmail}
                   placeholder="Адреса електронної пошти"
                   onFocus={() => {
                     setIsShowKeyboard(true),
@@ -132,6 +134,7 @@ const LoginScreen = () => {
                   placeholderTextColor={"#BDBDBD"}
                   textContentType="password"
                   value={state.password}
+                  onChangeText={onChangePass}
                   secureTextEntry={secureTextEntry}
                   placeholder="Пароль"
                   onFocus={() => {
@@ -162,8 +165,10 @@ const LoginScreen = () => {
                 style={styles.btn}
                 activeOpacity={0.8}
                 onPress={handleLogin}>
-                <TouchableOpacity onPress={onBtnLogPress}>
-                  <Text style={styles.btnText}>Увійти</Text>
+                <TouchableOpacity
+                  style={styles.btnText}
+                  onPress={onBtnLogPress}>
+                  <Text>Увійти</Text>
                 </TouchableOpacity>
               </TouchableOpacity>
               <TouchableOpacity

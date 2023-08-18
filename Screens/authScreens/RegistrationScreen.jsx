@@ -51,6 +51,10 @@ const RegistrationScreen = ({ isAuth }) => {
     navigation.navigate("Home");
   };
 
+  const onBtnLogPress = () => {
+    navigation.navigate("Home");
+  };
+
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
       <View style={styles.container}>
@@ -203,7 +207,11 @@ const RegistrationScreen = ({ isAuth }) => {
                 style={styles.btn}
                 activeOpacity={0.8}
                 onPress={handleRegistration}>
-                <Text style={styles.btnText}>Зареєструватися</Text>
+                <TouchableOpacity
+                  style={styles.btnText}
+                  onPress={onBtnLogPress}>
+                  <Text>Зареєструватися</Text>
+                </TouchableOpacity>
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.7}

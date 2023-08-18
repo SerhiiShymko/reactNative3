@@ -11,20 +11,20 @@ const AuthStack = createNativeStackNavigator();
 const NavigateStack = createBottomTabNavigator();
 
 export default function useRoute(isAuth) {
-  if (isAuth) {
+  if (!isAuth) {
     return (
       <AuthStack.Navigator
         initialRouteName="Login"
         screenOptions={{ headerShow: false }}>
         <AuthStack.Screen
           name="Registration"
-          component={RegistrationScreen}
-          initialParams={{ isAuth }}
+          component={() => <RegistrationScreen isAuth={isAuth} />}
         />
         <AuthStack.Screen
           name="Login"
-          component={LoginScreen}
-          initialParams={{ isAuth }}
+          component={() => <LoginScreen isAuth={isAuth} />}
+          // component={LoginScreen}
+          // initialParams={{ isAuth }}
         />
       </AuthStack.Navigator>
     );
@@ -33,16 +33,20 @@ export default function useRoute(isAuth) {
   return (
     <NavigateStack.Navigator
       initialRouteName="Home"
-      tabBarOptions={{ showLabel: false }}
       activeColor="#FF6C00"
       screenOptions={{
         tabBarShowLabel: false,
-        tabBarStyle: [
-          {
-            display: "flex",
-          },
-          null,
-        ],
+        tabBarStyle: {
+          height: 83,
+          paddingHorizontal: 81,
+        },
+        headerTitleAlign: "center",
+        headerTitleStyle: {
+          fontSize: 17,
+          fontFamily: "Roboto-Medium",
+          lineHeight: 22,
+          color: "#212121",
+        },
       }}>
       <NavigateStack.Screen
         name="Home"

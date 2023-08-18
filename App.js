@@ -1,13 +1,12 @@
-// import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { useCallback, useEffect } from "react";
 import { useFonts } from "expo-font";
 import { StyleSheet, View } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 
 import useRoute from "./router";
-import { NavigationContainer } from "@react-navigation/native";
 
-export default function App(props) {
+export default function App(isAuth) {
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
     "Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
@@ -31,12 +30,12 @@ export default function App(props) {
     return null;
   }
 
-  // const routing = useRoute(isAuth);
-  const RoutingComponent = useRoute(props.isAuth);
+  const routing = useRoute(isAuth);
+  // const RoutingComponent = useRoute(isAuth);
 
   return (
     <View onLayout={onLayoutRootView} style={styles.container}>
-      <NavigationContainer>{RoutingComponent}</NavigationContainer>
+      <NavigationContainer>{routing}</NavigationContainer>
     </View>
   );
 }
