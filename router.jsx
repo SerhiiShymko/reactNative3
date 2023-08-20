@@ -1,13 +1,14 @@
+import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "./Screens/authScreens/LoginScreen";
 import RegistrationScreen from "./Screens/authScreens/RegistrationScreen";
 import ProfileScreen from "./Screens/navigateScreens/ProfileScreen";
 import CreatePostsScreen from "./Screens/navigateScreens/CreatePostsScreen";
 import Home from "./Screens/navigateScreens/Home";
 
-const AuthStack = createNativeStackNavigator();
+const AuthStack = createStackNavigator();
 const NavigateStack = createBottomTabNavigator();
 
 export default function useRoute(isAuth) {
@@ -18,13 +19,15 @@ export default function useRoute(isAuth) {
         screenOptions={{ headerShow: false }}>
         <AuthStack.Screen
           name="Registration"
-          component={() => <RegistrationScreen isAuth={isAuth} />}
+          // component={() => <RegistrationScreen isAuth={isAuth} />}
+          component={RegistrationScreen}
+          initialParams={{ isAuth }}
         />
         <AuthStack.Screen
           name="Login"
-          component={() => <LoginScreen isAuth={isAuth} />}
-          // component={LoginScreen}
-          // initialParams={{ isAuth }}
+          // component={() => <LoginScreen isAuth={isAuth} />}
+          component={LoginScreen}
+          initialParams={{ isAuth }}
         />
       </AuthStack.Navigator>
     );

@@ -4,9 +4,10 @@ import { useFonts } from "expo-font";
 import { StyleSheet, View } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 
-import useRoute from "./router";
+import { RoutingNavigation } from "./Screens/authScreens/RoutingNavigation";
+// import useRoute from "./router";
 
-export default function App(isAuth) {
+export default function App() {
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
     "Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
@@ -30,12 +31,14 @@ export default function App(isAuth) {
     return null;
   }
 
-  const routing = useRoute(isAuth);
+  // const routing = useRoute(isAuth);
   // const RoutingComponent = useRoute(isAuth);
 
   return (
     <View onLayout={onLayoutRootView} style={styles.container}>
-      <NavigationContainer>{routing}</NavigationContainer>
+      <NavigationContainer>
+        <RoutingNavigation />
+      </NavigationContainer>
     </View>
   );
 }
