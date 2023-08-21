@@ -1,35 +1,36 @@
-import React from "react";
-import { Ionicons } from "@expo/vector-icons";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
-import LoginScreen from "./Screens/authScreens/LoginScreen";
-import RegistrationScreen from "./Screens/authScreens/RegistrationScreen";
-import ProfileScreen from "./Screens/navigateScreens/ProfileScreen";
-import CreatePostsScreen from "./Screens/navigateScreens/CreatePostsScreen";
-import Home from "./Screens/navigateScreens/Home";
+// import React from "react";
+// import { Ionicons } from "@expo/vector-icons";
+// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+// import { createStackNavigator } from "@react-navigation/stack";
+// import LoginScreen from "./Screens/authScreens/LoginScreen";
+// import RegistrationScreen from "./Screens/authScreens/RegistrationScreen";
+// import ProfileScreen from "./Screens/navigateScreens/ProfileScreen";
+// import CreatePostsScreen from "./Screens/navigateScreens/CreatePostsScreen";
+// import Home from "./Screens/navigateScreens/Home";
 
-const AuthStack = createStackNavigator();
-const NavigateStack = createBottomTabNavigator();
+// const MainStack = createStackNavigator();
+// const NavigateStack = createBottomTabNavigator();
 
 export default function useRoute(isAuth) {
   if (!isAuth) {
     return (
-      <AuthStack.Navigator
+      <MainStack.Navigator
         initialRouteName="Login"
         screenOptions={{ headerShow: false }}>
-        <AuthStack.Screen
+        <MainStack.Screen
           name="Registration"
           // component={() => <RegistrationScreen isAuth={isAuth} />}
           component={RegistrationScreen}
           initialParams={{ isAuth }}
         />
-        <AuthStack.Screen
+        <MainStack.Screen
           name="Login"
           // component={() => <LoginScreen isAuth={isAuth} />}
           component={LoginScreen}
           initialParams={{ isAuth }}
         />
-      </AuthStack.Navigator>
+        <MainStack.Screen name="Home" component={Home} />
+      </MainStack.Navigator>
     );
   }
 
@@ -46,7 +47,7 @@ export default function useRoute(isAuth) {
         headerTitleAlign: "center",
         headerTitleStyle: {
           fontSize: 17,
-          fontFamily: "Roboto-Medium",
+          fontFamily: "RobotoMedium",
           lineHeight: 22,
           color: "#212121",
         },

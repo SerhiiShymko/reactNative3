@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   title: {
-    fontFamily: "Roboto-Medium",
+    fontFamily: "RobotoMedium",
     fontStyle: "normal",
     fontSize: 30,
     lineHeight: 35,
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   input: {
-    fontFamily: "Roboto-Regular",
+    fontFamily: "RobotoRegular",
     fontStyle: "normal",
     fontSize: 16,
     lineHeight: 19,
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   showPass: {
-    fontFamily: "Roboto-Regular",
+    fontFamily: "RobotoRegular",
     fontStyle: "normal",
     lineHeight: 19,
     fontSize: 16,
@@ -265,13 +265,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#FF6C00",
   },
   btnText: {
-    fontFamily: "Roboto-Regular",
+    fontFamily: "RobotoRegular",
     fontStyle: "normal",
     lineHeight: 19,
     color: "#FFFFFF",
   },
   formLink: {
-    fontFamily: "Roboto-Regular",
+    fontFamily: "RobotoRegular",
     fontStyle: "normal",
     lineHeight: 19,
     marginTop: 16,

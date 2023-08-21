@@ -1,58 +1,141 @@
+import React from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import PostsScreen from "./PostsScreen";
-import MapScreen from "./MapScreen";
-import CommentsScreen from "./CommentsScreen";
+import { createStackNavigator } from "@react-navigation/stack";
+import { StyleSheet, Pressable } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-const NestedScreen = createNativeStackNavigator();
+import PostsScreen from "./PostsScreen";
+import ProfileScreen from "./ProfileScreen";
+import CreatePostsScreen from "./CreatePostsScreen";
+
+const Tabs = createStackNavigator();
 
 const Home = () => {
+  const navigation = useNavigation();
+
   return (
-    <NestedScreen.Navigator
-      screenOptions={{
+    <Tabs.Navigator
+      initialRouteName="Home"
+      backBehavior="order"
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+          let routeName = route.name;
+
+          if (routeName === "PostsScreen") {
+            iconName = focused ? "grid" : "grid-outline";
+          } else if (routeName === "CreatePostScreen") {
+            iconName = focused ? "add" : "add-outline";
+          } else if (routeName === "ProfileScreen") {
+            iconName = focused ? "person" : "person-outline";
+          }
+
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarItemStyle: {
+          width: 70,
+          height: 40,
+          borderRadius: 20,
+          marginLeft: "auto",
+          marginRight: "auto",
+        },
         tabBarStyle: {
           height: 83,
-          paddingHorizontal: 81,
+          paddingLeft: 10,
+          paddingRight: 10,
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
         },
-        headerTitleAlign: "center",
-        headerTitleStyle: {
-          fontSize: 17,
-          fontFamily: "Roboto-Medium",
-          lineHeight: 22,
-          color: "#212121",
-        },
-      }}>
-      <NestedScreen.Screen
-        options={{
-          hederTitle: "Публікації",
-          headerRight: () => (
-            <Ionicons
-              name="log-in-outline"
-              size={30}
-              color="#BDBDBD"
-              style={{ marginRight: 10 }}
-            />
-          ),
-        }}
+
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: "#fff",
+        tabBarActiveBackgroundColor: "#FF6C00",
+        tabBarInactiveTintColor: "#808080",
+      })}>
+      <Tabs.Screen
         name="PostsScreen"
         component={PostsScreen}
-      />
-      <NestedScreen.Screen
         options={{
-          headerTitle: "Коментарі",
+          title: "Публікації",
+          headerTitleAlign: "center",
+          headerStyle: {
+            height: 100,
+            backgroundColor: "#fff",
+            shadowColor: "rgba(0, 0, 0, 0.5)",
+          },
+          headerTintColor: "#212121",
+          headerTitleStyle: {
+            fontWeight: 500,
+            fontSize: 17,
+            lineHeight: 22,
+            letterSpacing: 0.41,
+          },
+          headerRight: () => (
+            <Pressable onPress={() => navigation.navigate("Login")}>
+              <Ionicons
+                name="log-in-outline"
+                size={30}
+                color="#BDBDBD"
+                style={{ marginRight: 10 }}
+              />
+            </Pressable>
+          ),
         }}
-        name="Comments"
-        component={CommentsScreen}
       />
-      <NestedScreen.Screen
+      <Tabs.Screen
+        name="CreatePostScreen"
+        component={CreatePostsScreen}
         options={{
-          headerTitle: "Мапа",
+          title: "Створити публікацію",
+          headerTitleAlign: "center",
+          headerStyle: {
+            height: 100,
+            backgroundColor: "#fff",
+            shadowColor: "rgba(0, 0, 0, 0.5)",
+          },
+          headerTintColor: "#212121",
+          headerTitleStyle: {
+            fontWeight: 500,
+            fontSize: 17,
+            lineHeight: 22,
+            letterSpacing: 0.41,
+          },
+
+          headerLeft: () => (
+            <Pressable
+              onPress={() => navigation.navigate("PostsScreen")}
+              style={styles.ArrowBack}>
+              <Ionicons name="arrow-back" size={24} color={"#212121"} />
+            </Pressable>
+          ),
         }}
-        name="MapScreen"
-        component={MapScreen}
       />
-    </NestedScreen.Navigator>
+      <Tabs.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{ headerShown: false }}
+      />
+    </Tabs.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  LogOutIcon: {
+    marginRight: 10,
+    width: 24,
+    height: 24,
+  },
+
+  ArrowBack: {
+    paddingLeft: 16,
+  },
+});
 
 export default Home;

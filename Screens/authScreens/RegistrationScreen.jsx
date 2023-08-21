@@ -51,7 +51,7 @@ const RegistrationScreen = ({ isAuth }) => {
     navigation.navigate("Home");
   };
 
-  const onBtnLogPress = () => {
+  const onBtnRegPress = () => {
     navigation.navigate("Home");
   };
 
@@ -209,7 +209,7 @@ const RegistrationScreen = ({ isAuth }) => {
                 onPress={handleRegistration}>
                 <TouchableOpacity
                   style={styles.btnText}
-                  onPress={onBtnLogPress}>
+                  onPress={onBtnRegPress}>
                   <Text>Зареєструватися</Text>
                 </TouchableOpacity>
               </TouchableOpacity>
@@ -280,7 +280,7 @@ const styles = StyleSheet.create({
     borderColor: "#E8E8E8",
   },
   title: {
-    fontFamily: "Roboto-Medium",
+    fontFamily: "RobotoMedium",
     fontStyle: "normal",
     fontSize: 30,
     lineHeight: 35,
@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   input: {
-    fontFamily: "Roboto-Regular",
+    fontFamily: "RobotoRegular",
     fontStyle: "normal",
     fontSize: 16,
     lineHeight: 19,
@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   showPass: {
-    fontFamily: "Roboto-Regular",
+    fontFamily: "RobotoRegular",
     fontStyle: "normal",
     lineHeight: 19,
     fontSize: 16,
@@ -327,13 +327,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   btnText: {
-    fontFamily: "Roboto-Regular",
+    fontFamily: "RobotoRegular",
     fontStyle: "normal",
     lineHeight: 19,
     color: "#FFFFFF",
   },
   formLink: {
-    fontFamily: "Roboto-Regular",
+    fontFamily: "RobotoRegular",
     fontStyle: "normal",
     lineHeight: 19,
     marginTop: 16,
