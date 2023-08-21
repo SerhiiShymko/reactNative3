@@ -43,16 +43,13 @@ const RegistrationScreen = ({ isAuth }) => {
   };
 
   const handleRegistration = () => {
+    navigation.navigate("Home");
+
     setIsShowKeyboard(true);
     Keyboard.dismiss();
     console.log(state);
     setState(initialState);
     isAuth = true;
-    navigation.navigate("Home");
-  };
-
-  const onBtnRegPress = () => {
-    navigation.navigate("Home");
   };
 
   return (
@@ -207,11 +204,7 @@ const RegistrationScreen = ({ isAuth }) => {
                 style={styles.btn}
                 activeOpacity={0.8}
                 onPress={handleRegistration}>
-                <TouchableOpacity
-                  style={styles.btnText}
-                  onPress={onBtnRegPress}>
-                  <Text>Зареєструватися</Text>
-                </TouchableOpacity>
+                <Text style={styles.btnText}>Зареєструватися</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.7}
@@ -280,7 +273,7 @@ const styles = StyleSheet.create({
     borderColor: "#E8E8E8",
   },
   title: {
-    fontFamily: "RobotoMedium",
+    fontFamily: "Roboto-Medium",
     fontStyle: "normal",
     fontSize: 30,
     lineHeight: 35,
@@ -289,7 +282,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   input: {
-    fontFamily: "RobotoRegular",
+    fontFamily: "Roboto-Regular",
     fontStyle: "normal",
     fontSize: 16,
     lineHeight: 19,
@@ -309,7 +302,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   showPass: {
-    fontFamily: "RobotoRegular",
+    fontFamily: "Roboto-Regular",
     fontStyle: "normal",
     lineHeight: 19,
     fontSize: 16,
@@ -327,13 +320,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   btnText: {
-    fontFamily: "RobotoRegular",
+    fontFamily: "Roboto-Regular",
     fontStyle: "normal",
     lineHeight: 19,
     color: "#FFFFFF",
   },
   formLink: {
-    fontFamily: "RobotoRegular",
+    fontFamily: "Roboto-Regular",
     fontStyle: "normal",
     lineHeight: 19,
     marginTop: 16,

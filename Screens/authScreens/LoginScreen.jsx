@@ -28,8 +28,8 @@ const LoginScreen = () => {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
   const [isFocusInput, setIsFocusInput] = useState(initialFocuseState);
-  const [email, onChangeEmail] = useState("");
-  const [password, onChangePass] = useState("");
+  const [email, setChangeEmail] = useState("");
+  const [password, setChangePass] = useState("");
 
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const openPassword = () => {
@@ -42,17 +42,11 @@ const LoginScreen = () => {
   };
 
   const handleLogin = () => {
+    navigation.navigate("Home");
     setIsShowKeyboard(false);
     Keyboard.dismiss();
     console.log(state);
     setState(initialState);
-  };
-
-  const onBtnLogPress = () => {
-    navigation.navigate("Home");
-
-    onChangeEmail("");
-    onChangePass("");
   };
 
   return (
@@ -98,7 +92,7 @@ const LoginScreen = () => {
                   keyboardType="email-address"
                   textContentType="emailAddress"
                   value={state.email}
-                  onChangeText={onChangeEmail}
+                  changeText={setChangeEmail}
                   placeholder="Адреса електронної пошти"
                   onFocus={() => {
                     setIsShowKeyboard(true),
@@ -134,7 +128,7 @@ const LoginScreen = () => {
                   placeholderTextColor={"#BDBDBD"}
                   textContentType="password"
                   value={state.password}
-                  onChangeText={onChangePass}
+                  changeText={setChangePass}
                   secureTextEntry={secureTextEntry}
                   placeholder="Пароль"
                   onFocus={() => {
@@ -165,11 +159,7 @@ const LoginScreen = () => {
                 style={styles.btn}
                 activeOpacity={0.8}
                 onPress={handleLogin}>
-                <TouchableOpacity
-                  style={styles.btnText}
-                  onPress={onBtnLogPress}>
-                  <Text>Увійти</Text>
-                </TouchableOpacity>
+                <Text style={styles.btnText}>Увійти</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.7}
@@ -208,7 +198,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   title: {
-    fontFamily: "RobotoMedium",
+    fontFamily: "Roboto-Medium",
     fontStyle: "normal",
     fontSize: 30,
     lineHeight: 35,
@@ -217,7 +207,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   input: {
-    fontFamily: "RobotoRegular",
+    fontFamily: "Roboto-Regular",
     fontStyle: "normal",
     fontSize: 16,
     lineHeight: 19,
@@ -234,7 +224,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   showPass: {
-    fontFamily: "RobotoRegular",
+    fontFamily: "Roboto-Regular",
     fontStyle: "normal",
     lineHeight: 19,
     fontSize: 16,
@@ -265,13 +255,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#FF6C00",
   },
   btnText: {
-    fontFamily: "RobotoRegular",
+    fontFamily: "Roboto-Regular",
     fontStyle: "normal",
     lineHeight: 19,
     color: "#FFFFFF",
   },
   formLink: {
-    fontFamily: "RobotoRegular",
+    fontFamily: "Roboto-Regular",
     fontStyle: "normal",
     lineHeight: 19,
     marginTop: 16,

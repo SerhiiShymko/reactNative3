@@ -1,6 +1,6 @@
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StyleSheet, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -8,14 +8,14 @@ import PostsScreen from "./PostsScreen";
 import ProfileScreen from "./ProfileScreen";
 import CreatePostsScreen from "./CreatePostsScreen";
 
-const Tabs = createStackNavigator();
+const Tabs = createBottomTabNavigator();
 
 const Home = () => {
   const navigation = useNavigation();
 
   return (
     <Tabs.Navigator
-      initialRouteName="Home"
+      initialRouteName="PostScreen"
       backBehavior="order"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {

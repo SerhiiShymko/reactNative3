@@ -14,43 +14,34 @@ const MainStack = createStackNavigator();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    // RobotoRegular: require("./assets/fonts/Roboto-Regular.ttf"),
-    RobotoMedium: require("./assets/fonts/Roboto-Medium.ttf"),
-    // RobotoBold: require("./assets/fonts/Roboto-Bold.ttf"),
+    "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
+    "Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
+    "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
   });
 
-  // useEffect(() => {
-  //   async function prepare() {
-  //     await SplashScreen.preventAutoHideAsync();
-  //   }
-  //   prepare();
-  // }, []);
-
-  // const onLayoutRootView = useCallback(async () => {
-  //   if (fontsLoaded) {
-  //     await SplashScreen.hideAsync();
-  //   }
-  // }, [!fontsLoaded]);
-
-  // if (!fontsLoaded) {
-  //   return null;
-  // }
-
-  // const routing = useRoute(isAuth);
-  // const RoutingComponent = useRoute(isAuth);
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <MainStack.Navigator
-          initialRouteName="Login"
-          screenOptions={{ headerShow: false }}>
+        <MainStack.Navigator initialRouteName="Login">
           <MainStack.Screen
             name="Registration"
             component={RegistrationScreen}
+            options={{ headerShown: false }}
           />
-          <MainStack.Screen name="Login" component={LoginScreen} />
-          <MainStack.Screen name="Home" component={Home} />
+          <MainStack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ headerShown: false }}
+          />
+          <MainStack.Screen
+            name="Home"
+            component={Home}
+            options={{ headerShown: false }}
+          />
         </MainStack.Navigator>
       </NavigationContainer>
 
