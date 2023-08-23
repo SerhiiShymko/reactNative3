@@ -110,6 +110,9 @@ const Home = () => {
               <Ionicons name="arrow-back" size={24} color={"#212121"} />
             </Pressable>
           ),
+          tabBarStyle: {
+            height: 0,
+          },
         }}
       />
       <Tabs.Screen
